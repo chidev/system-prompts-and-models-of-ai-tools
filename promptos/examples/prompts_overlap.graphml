@@ -1,0 +1,305 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d2" for="node" attr.name="freq" attr.type="long"/>
+<key id="d1" for="node" attr.name="label" attr.type="string"/>
+<key id="d0" for="node" attr.name="node_type" attr.type="string"/>
+<graph edgedefault="undirected"><node id="prompt:Anthropic_Claude_Code_2.0">
+  <data key="d0">prompt</data>
+  <data key="d1">Anthropic_Claude_Code_2.0</data>
+</node>
+<node id="feature:identity.coding_agent">
+  <data key="d0">feature</data>
+  <data key="d1">identity.coding_agent</data>
+  <data key="d2">3</data>
+</node>
+<node id="feature:safety.defensive_security_only">
+  <data key="d0">feature</data>
+  <data key="d1">safety.defensive_security_only</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:safety.no_malicious_code">
+  <data key="d0">feature</data>
+  <data key="d1">safety.no_malicious_code</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:style.minimize_tokens">
+  <data key="d0">feature</data>
+  <data key="d1">style.minimize_tokens</data>
+  <data key="d2">2</data>
+</node>
+<node id="feature:style.no_emojis_default">
+  <data key="d0">feature</data>
+  <data key="d1">style.no_emojis_default</data>
+  <data key="d2">2</data>
+</node>
+<node id="feature:tools.batch_parallel">
+  <data key="d0">feature</data>
+  <data key="d1">tools.batch_parallel</data>
+  <data key="d2">3</data>
+</node>
+<node id="feature:tools.prefer_specialized_tools">
+  <data key="d0">feature</data>
+  <data key="d1">tools.prefer_specialized_tools</data>
+  <data key="d2">2</data>
+</node>
+<node id="feature:tools.todo_list_required">
+  <data key="d0">feature</data>
+  <data key="d1">tools.todo_list_required</data>
+  <data key="d2">2</data>
+</node>
+<node id="feature:code.no_new_files_unless_needed">
+  <data key="d0">feature</data>
+  <data key="d1">code.no_new_files_unless_needed</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:code.no_docs_unless_requested">
+  <data key="d0">feature</data>
+  <data key="d1">code.no_docs_unless_requested</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:claude_code.no_guess_urls">
+  <data key="d0">feature</data>
+  <data key="d1">claude_code.no_guess_urls</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:claude_code.code_references_file_line">
+  <data key="d0">feature</data>
+  <data key="d1">claude_code.code_references_file_line</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:meta.has_explicit_current_date">
+  <data key="d0">feature</data>
+  <data key="d1">meta.has_explicit_current_date</data>
+  <data key="d2">3</data>
+</node>
+<node id="feature:meta.has_knowledge_cutoff">
+  <data key="d0">feature</data>
+  <data key="d1">meta.has_knowledge_cutoff</data>
+  <data key="d2">3</data>
+</node>
+<node id="feature:cursor.tools.grep">
+  <data key="d0">feature</data>
+  <data key="d1">cursor.tools.grep</data>
+  <data key="d2">2</data>
+</node>
+<node id="prompt:Cursor_Agent_Prompt_2.0">
+  <data key="d0">prompt</data>
+  <data key="d1">Cursor_Agent_Prompt_2.0</data>
+</node>
+<node id="feature:cursor.tools.update_memory">
+  <data key="d0">feature</data>
+  <data key="d1">cursor.tools.update_memory</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:cursor.tools.edit_notebook">
+  <data key="d0">feature</data>
+  <data key="d1">cursor.tools.edit_notebook</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:cursor.tools.read_lints">
+  <data key="d0">feature</data>
+  <data key="d1">cursor.tools.read_lints</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:cursor.tools.codebase_search">
+  <data key="d0">feature</data>
+  <data key="d1">cursor.tools.codebase_search</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:cursor.tools.run_terminal_cmd">
+  <data key="d0">feature</data>
+  <data key="d1">cursor.tools.run_terminal_cmd</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:cursor.tools.web_search">
+  <data key="d0">feature</data>
+  <data key="d1">cursor.tools.web_search</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:cursor.output_channel.im_start">
+  <data key="d0">feature</data>
+  <data key="d1">cursor.output_channel.im_start</data>
+  <data key="d2">1</data>
+</node>
+<node id="prompt:Lovable_Agent_Prompt">
+  <data key="d0">prompt</data>
+  <data key="d1">Lovable_Agent_Prompt</data>
+</node>
+<node id="feature:identity.web_app_editor">
+  <data key="d0">feature</data>
+  <data key="d1">identity.web_app_editor</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:language.match_user_language">
+  <data key="d0">feature</data>
+  <data key="d1">language.match_user_language</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:workflow.plan_explicit">
+  <data key="d0">feature</data>
+  <data key="d1">workflow.plan_explicit</data>
+  <data key="d2">2</data>
+</node>
+<node id="feature:workflow.ask_clarifying_questions_when_uncertain">
+  <data key="d0">feature</data>
+  <data key="d1">workflow.ask_clarifying_questions_when_uncertain</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:workflow.default_discussion_before_implementation">
+  <data key="d0">feature</data>
+  <data key="d1">workflow.default_discussion_before_implementation</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:code.read_context_before_reading_files">
+  <data key="d0">feature</data>
+  <data key="d1">code.read_context_before_reading_files</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:lovable.seo_requirements">
+  <data key="d0">feature</data>
+  <data key="d1">lovable.seo_requirements</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:lovable.design_system_tokens">
+  <data key="d0">feature</data>
+  <data key="d1">lovable.design_system_tokens</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:lovable.supabase_only_backend">
+  <data key="d0">feature</data>
+  <data key="d1">lovable.supabase_only_backend</data>
+  <data key="d2">1</data>
+</node>
+<node id="prompt:Perplexity_Prompt">
+  <data key="d0">prompt</data>
+  <data key="d1">Perplexity_Prompt</data>
+</node>
+<node id="feature:identity.search_assistant">
+  <data key="d0">feature</data>
+  <data key="d1">identity.search_assistant</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:confidentiality.no_reveal_system_prompt">
+  <data key="d0">feature</data>
+  <data key="d1">confidentiality.no_reveal_system_prompt</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:copyright.no_verbatim">
+  <data key="d0">feature</data>
+  <data key="d1">copyright.no_verbatim</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:copyright.no_song_lyrics">
+  <data key="d0">feature</data>
+  <data key="d1">copyright.no_song_lyrics</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:style.journalistic_unbiased">
+  <data key="d0">feature</data>
+  <data key="d1">style.journalistic_unbiased</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:format.no_header_start">
+  <data key="d0">feature</data>
+  <data key="d1">format.no_header_start</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:format.section_headers_level2">
+  <data key="d0">feature</data>
+  <data key="d1">format.section_headers_level2</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:format.no_references_section">
+  <data key="d0">feature</data>
+  <data key="d1">format.no_references_section</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:format.markdown_tables_for_comparisons">
+  <data key="d0">feature</data>
+  <data key="d1">format.markdown_tables_for_comparisons</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:format.latex_for_math_no_dollar">
+  <data key="d0">feature</data>
+  <data key="d1">format.latex_for_math_no_dollar</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:citations.required_inline">
+  <data key="d0">feature</data>
+  <data key="d1">citations.required_inline</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:citations.bracket_indices">
+  <data key="d0">feature</data>
+  <data key="d1">citations.bracket_indices</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:citations.max_three_per_sentence">
+  <data key="d0">feature</data>
+  <data key="d1">citations.max_three_per_sentence</data>
+  <data key="d2">1</data>
+</node>
+<node id="feature:workflow.query_type_routing">
+  <data key="d0">feature</data>
+  <data key="d1">workflow.query_type_routing</data>
+  <data key="d2">1</data>
+</node>
+<edge source="prompt:Anthropic_Claude_Code_2.0" target="feature:identity.coding_agent"/>
+<edge source="prompt:Anthropic_Claude_Code_2.0" target="feature:safety.defensive_security_only"/>
+<edge source="prompt:Anthropic_Claude_Code_2.0" target="feature:safety.no_malicious_code"/>
+<edge source="prompt:Anthropic_Claude_Code_2.0" target="feature:style.minimize_tokens"/>
+<edge source="prompt:Anthropic_Claude_Code_2.0" target="feature:style.no_emojis_default"/>
+<edge source="prompt:Anthropic_Claude_Code_2.0" target="feature:tools.batch_parallel"/>
+<edge source="prompt:Anthropic_Claude_Code_2.0" target="feature:tools.prefer_specialized_tools"/>
+<edge source="prompt:Anthropic_Claude_Code_2.0" target="feature:tools.todo_list_required"/>
+<edge source="prompt:Anthropic_Claude_Code_2.0" target="feature:code.no_new_files_unless_needed"/>
+<edge source="prompt:Anthropic_Claude_Code_2.0" target="feature:code.no_docs_unless_requested"/>
+<edge source="prompt:Anthropic_Claude_Code_2.0" target="feature:claude_code.no_guess_urls"/>
+<edge source="prompt:Anthropic_Claude_Code_2.0" target="feature:claude_code.code_references_file_line"/>
+<edge source="prompt:Anthropic_Claude_Code_2.0" target="feature:meta.has_explicit_current_date"/>
+<edge source="prompt:Anthropic_Claude_Code_2.0" target="feature:meta.has_knowledge_cutoff"/>
+<edge source="prompt:Anthropic_Claude_Code_2.0" target="feature:cursor.tools.grep"/>
+<edge source="feature:identity.coding_agent" target="prompt:Cursor_Agent_Prompt_2.0"/>
+<edge source="feature:identity.coding_agent" target="prompt:Lovable_Agent_Prompt"/>
+<edge source="feature:style.minimize_tokens" target="prompt:Lovable_Agent_Prompt"/>
+<edge source="feature:style.no_emojis_default" target="prompt:Perplexity_Prompt"/>
+<edge source="feature:tools.batch_parallel" target="prompt:Cursor_Agent_Prompt_2.0"/>
+<edge source="feature:tools.batch_parallel" target="prompt:Lovable_Agent_Prompt"/>
+<edge source="feature:tools.prefer_specialized_tools" target="prompt:Lovable_Agent_Prompt"/>
+<edge source="feature:tools.todo_list_required" target="prompt:Cursor_Agent_Prompt_2.0"/>
+<edge source="feature:meta.has_explicit_current_date" target="prompt:Lovable_Agent_Prompt"/>
+<edge source="feature:meta.has_explicit_current_date" target="prompt:Perplexity_Prompt"/>
+<edge source="feature:meta.has_knowledge_cutoff" target="prompt:Cursor_Agent_Prompt_2.0"/>
+<edge source="feature:meta.has_knowledge_cutoff" target="prompt:Perplexity_Prompt"/>
+<edge source="feature:cursor.tools.grep" target="prompt:Cursor_Agent_Prompt_2.0"/>
+<edge source="prompt:Cursor_Agent_Prompt_2.0" target="feature:cursor.tools.update_memory"/>
+<edge source="prompt:Cursor_Agent_Prompt_2.0" target="feature:cursor.tools.edit_notebook"/>
+<edge source="prompt:Cursor_Agent_Prompt_2.0" target="feature:cursor.tools.read_lints"/>
+<edge source="prompt:Cursor_Agent_Prompt_2.0" target="feature:cursor.tools.codebase_search"/>
+<edge source="prompt:Cursor_Agent_Prompt_2.0" target="feature:cursor.tools.run_terminal_cmd"/>
+<edge source="prompt:Cursor_Agent_Prompt_2.0" target="feature:cursor.tools.web_search"/>
+<edge source="prompt:Cursor_Agent_Prompt_2.0" target="feature:cursor.output_channel.im_start"/>
+<edge source="prompt:Lovable_Agent_Prompt" target="feature:identity.web_app_editor"/>
+<edge source="prompt:Lovable_Agent_Prompt" target="feature:language.match_user_language"/>
+<edge source="prompt:Lovable_Agent_Prompt" target="feature:workflow.plan_explicit"/>
+<edge source="prompt:Lovable_Agent_Prompt" target="feature:workflow.ask_clarifying_questions_when_uncertain"/>
+<edge source="prompt:Lovable_Agent_Prompt" target="feature:workflow.default_discussion_before_implementation"/>
+<edge source="prompt:Lovable_Agent_Prompt" target="feature:code.read_context_before_reading_files"/>
+<edge source="prompt:Lovable_Agent_Prompt" target="feature:lovable.seo_requirements"/>
+<edge source="prompt:Lovable_Agent_Prompt" target="feature:lovable.design_system_tokens"/>
+<edge source="prompt:Lovable_Agent_Prompt" target="feature:lovable.supabase_only_backend"/>
+<edge source="feature:workflow.plan_explicit" target="prompt:Perplexity_Prompt"/>
+<edge source="prompt:Perplexity_Prompt" target="feature:identity.search_assistant"/>
+<edge source="prompt:Perplexity_Prompt" target="feature:confidentiality.no_reveal_system_prompt"/>
+<edge source="prompt:Perplexity_Prompt" target="feature:copyright.no_verbatim"/>
+<edge source="prompt:Perplexity_Prompt" target="feature:copyright.no_song_lyrics"/>
+<edge source="prompt:Perplexity_Prompt" target="feature:style.journalistic_unbiased"/>
+<edge source="prompt:Perplexity_Prompt" target="feature:format.no_header_start"/>
+<edge source="prompt:Perplexity_Prompt" target="feature:format.section_headers_level2"/>
+<edge source="prompt:Perplexity_Prompt" target="feature:format.no_references_section"/>
+<edge source="prompt:Perplexity_Prompt" target="feature:format.markdown_tables_for_comparisons"/>
+<edge source="prompt:Perplexity_Prompt" target="feature:format.latex_for_math_no_dollar"/>
+<edge source="prompt:Perplexity_Prompt" target="feature:citations.required_inline"/>
+<edge source="prompt:Perplexity_Prompt" target="feature:citations.bracket_indices"/>
+<edge source="prompt:Perplexity_Prompt" target="feature:citations.max_three_per_sentence"/>
+<edge source="prompt:Perplexity_Prompt" target="feature:workflow.query_type_routing"/>
+</graph></graphml>

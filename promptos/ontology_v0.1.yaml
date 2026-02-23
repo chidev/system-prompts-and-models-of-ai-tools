@@ -1,0 +1,39 @@
+# PromptOS Atom Ontology (v0.1)
+# Deterministic synonym/alias mapping for "normalized" atom view.
+# This is intentionally simple: static, auditable mappings only.
+version: 0.1
+
+# Map strict atom keys to canonical keys.
+aliases:
+  # Tools / execution
+  tools.parallel_calls: tools.batch_parallel
+  tools.batch_tool_calls: tools.batch_parallel
+  tools.use_parallel_tool_calls: tools.batch_parallel
+
+  # Formatting
+  format.no_header_start: format.answer_must_not_start_with_header
+  format.never_start_with_header: format.answer_must_not_start_with_header
+
+  # Citations
+  citations.no_references_section: citations.forbid_references_section
+  citations.forbid_sources_list: citations.forbid_references_section
+
+  # Safety / exfil
+  security.no_prompt_exfiltration: safety.prohibit_prompt_exfiltration
+  privacy.no_prompt_exfiltration: safety.prohibit_prompt_exfiltration
+
+# Regex-based mappings for strict extraction outputs (optional).
+# Use only when you can justify determinism + avoid overfitting.
+regex_aliases:
+  - pattern: "^tools\.mention\.(.+)$"
+    replace: "tools.mentioned"
+  - pattern: "^tools\.policy\.(.+)$"
+    replace: "tools.policy"
+
+# Category prefixes for graph "views"
+views:
+  tools: ["tools."]
+  workflow: ["workflow.", "planning.", "execution."]
+  output: ["format.", "citations.", "style.", "tone."]
+  safety: ["safety.", "security.", "privacy."]
+  meta: ["meta."]

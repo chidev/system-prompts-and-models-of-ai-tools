@@ -1,0 +1,206 @@
+dsl_version: '0.1'
+prompt:
+  id: Cursor_Agent_Prompt_2.0
+  source:
+    repo: 'x1xhlol/system-prompts-and-models-of-ai-tools (mirror: git.nevets.tech/Steven/...)'
+    path: (see id; example-only extraction)
+    url: null
+  classification:
+    product: Cursor
+    family: system_prompt
+    primary_domain: coding
+    orchestration_role: orchestrator
+  metadata:
+    knowledge_cutoff: 2024-06
+    current_date: null
+    release_date: null
+    modalities:
+    - code
+    - image
+    - text
+  components:
+    identity:
+      name: Cursor
+      description: IDE coding agent with tool APIs for search/edit/terminal.
+    goals:
+    - Assist with software engineering tasks (debug, refactor, implement).
+    assumptions: []
+    constraints:
+    - type: tooling
+      rule: // If the user augments an existing memory, you MUST use this tool with
+        the action 'update'.
+    - type: tooling
+      rule: // If the user asks to remember something, for something to be saved,
+        or to create a memory, you MUST use this tool with the action 'create'.
+    - type: tooling
+      rule: // NEVER call this tool on a file unless you've edited it or are about
+        to edit it
+    - type: other
+      rule: '// - The old_string MUST uniquely identify the specific instance you
+        want to change. This means:'
+    - type: other
+      rule: '// - ALWAYS generate arguments in the following order: target_notebook,
+        cell_idx, is_new_cell, cell_language, old_string, new_string.'
+    - type: tooling
+      rule: // - ALWAYS provide ALL required arguments (including BOTH old_string
+        and new_string). NEVER call this tool without providing 'new_string'.
+    - type: tooling
+      rule: '// NEVER INCLUDE THESE IN TODOS: linting; testing; searching or examining
+        the codebase.'
+    - type: tooling
+      rule: '// Specify ONLY the precise lines of code that you wish to edit. **NEVER
+        specify or write out unchanged code**. Instead, represent all unchanged code
+        using the comment of the language you''re editing in - example: `// ... existing
+        code ...`'
+    - type: tooling
+      rule: 1. ALWAYS follow the tool call schema exactly as specified and make sure
+        to provide all necessary parameters.
+    - type: tooling
+      rule: 2. The conversation may reference tools that are no longer available.
+        NEVER call tools that are not explicitly provided.
+    - type: tooling
+      rule: 3. **NEVER refer to tool names when speaking to the USER.** Instead, just
+        say what the tool is doing in natural language.
+    - type: tooling
+      rule: When making code changes, NEVER output code to the USER, unless requested.
+        Instead use one of the code edit tools to implement the change.
+    - type: other
+      rule: 4. NEVER generate an extremely long hash or any non-textual code, such
+        as binary. These are not helpful to the USER and are very expensive.
+    - type: other
+      rule: '### NEVER Indent the Triple Backticks'
+    - type: other
+      rule: '### ALWAYS Add a Newline Before Code Fences'
+    - type: other
+      rule: 'RULE SUMMARY (ALWAYS Follow):'
+    - type: other
+      rule: '- NEVER mix formats.'
+    - type: format
+      rule: '- NEVER add language tags to CODE REFERENCES.'
+    - type: other
+      rule: '- NEVER indent triple backticks.'
+    - type: other
+      rule: '- ALWAYS include at least 1 line of code in any reference block.'
+    tool_policy:
+    - rule: Batch independent tool calls; avoid sequential calls when parallelizable.
+    - rule: Use todo/task-list tooling to plan and track multi-step work.
+    output_policy:
+      tone: null
+      format_rules: []
+      citation_rules: []
+  execution:
+    behavior_tree:
+      root: root
+      nodes:
+        ingest:
+          type: action
+          do:
+          - parse_user_input
+          - read_system_context
+        determine_intent:
+          type: action
+          do:
+          - infer_intent_domain
+        plan:
+          type: action
+          do:
+          - create_plan
+          - create_or_update_todo_list
+        gather:
+          type: action
+          do:
+          - gather_required_context
+          - batch_tool_calls_when_independent
+        act:
+          type: action
+          do:
+          - perform_task
+        respond:
+          type: action
+          do:
+          - compose_response
+        final_checks:
+          type: action
+          do:
+          - check_constraints
+        root:
+          type: sequence
+          children:
+          - ingest
+          - determine_intent
+          - plan
+          - gather
+          - act
+          - respond
+          - final_checks
+    fsm:
+      initial: START
+      states:
+        START:
+          on_enter:
+          - parse_user_input
+          transitions:
+          - when: always
+            to: GATHER
+        PLAN_OR_ROUTE:
+          on_enter:
+          - classify_or_plan
+          transitions:
+          - when: needs_clarification
+            to: CLARIFY
+          - when: ready
+            to: GATHER
+        CLARIFY:
+          on_enter:
+          - ask_questions
+          - wait_for_user
+          transitions:
+          - when: user_replies
+            to: PLAN_OR_ROUTE
+        GATHER:
+          on_enter:
+          - collect_context
+          transitions:
+          - when: context_ready
+            to: ACT
+        ACT:
+          on_enter:
+          - do_work
+          transitions:
+          - when: work_done
+            to: RESPOND
+        RESPOND:
+          on_enter:
+          - format_output
+          - apply_citations_if_needed
+          transitions:
+          - when: output_ready
+            to: END
+        END:
+          on_enter:
+          - return_response
+          transitions: []
+  features:
+    atoms:
+    - cursor.output_channel.im_start
+    - cursor.tools.codebase_search
+    - cursor.tools.edit_notebook
+    - cursor.tools.grep
+    - cursor.tools.read_lints
+    - cursor.tools.run_terminal_cmd
+    - cursor.tools.update_memory
+    - cursor.tools.web_search
+    - identity.coding_agent
+    - tools.batch_parallel
+    - tools.todo_list_required
+    params:
+      word_count: 5877
+      char_count: 38842
+      counts:
+        NEVER: 12
+        ALWAYS: 6
+        MUST: 3
+  harness_candidates:
+  - feature: tools.batch_parallel
+    why: Tool-call scheduler can automatically batch parallelizable operations
+    suggested_harness_enforcement: auto-batching + toolcall planner

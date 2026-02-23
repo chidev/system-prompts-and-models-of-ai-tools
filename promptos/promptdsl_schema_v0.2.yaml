@@ -1,0 +1,126 @@
+# PromptOS DSL Schema (v0.2)
+# Purpose: deterministic, auditable decomposition of a prompt into
+#  - classification buckets
+#  - atomic directives ("atoms") for overlap detection
+#  - executable abstractions (FSM + BehaviorTree) for harness planning
+#
+# Notes:
+#  - Tool schemas (JSON blocks etc.) live in appendix.tool_schemas and are referenced, not inlined, from toolcalling.
+#  - Tool *calling policies* (when/how to call tools) DO become atoms and are part of overlap graphs.
+version: 0.2
+
+prompt:
+  id: ""                # stable id (recommended: sha256(repo_url + path + optional commit))
+  source:
+    repo_url: ""        # e.g. https://github.com/chidev/system-prompts-and-models-of-ai-tools
+    ref: "main"         # branch/tag/commit if known
+    path: ""            # repo-relative path to file
+    retrieved_at: ""    # ISO timestamp of extraction
+  metadata:
+    product: ""         # e.g. Cursor, Claude Code, Lovable
+    vendor: ""          # e.g. Anthropic, Anysphere, Perplexity
+    file_type: ""       # txt|md|json|yaml|other
+    language_hint: ""   # en|multi|unknown
+    date_hint: ""       # extracted from prompt text if present (not retrieval time)
+    size_bytes: 0
+    sha256: ""          # sha256 of raw file bytes/text (deterministic provenance)
+    notes: []           # freeform (optional)
+
+classification:
+  # "What kind of prompt artifact is this?"
+  prompt_kind: ""       # system|developer|tool|model_config|harness|escalation|oracle|worker|critic|router|other
+  agent_archetype: ""   # coding_agent|search_writer|chat_assistant|browser_agent|multimodal|other
+  runtime_surface: ""   # cli|ide|web|mobile|server|unknown
+  loop_style: ""        # single_turn|multi_turn|agentic_loop|unknown
+  # Optional: allow multiple tags for subtyping
+  tags: []              # e.g. ["citation-heavy", "strict-format", "security-policy"]
+
+structure:
+  # Deterministic segmentation for audit + for future richer parsers.
+  # A segment is just a named span of lines/bytes with a coarse type.
+  segments:
+    - name: ""          # e.g. "role", "tools", "formatting", "safety"
+      kind: ""          # prose|rules|tool_schema|examples|meta|unknown
+      start_line: 0
+      end_line: 0
+      signals: []       # e.g. ["MUST", "NEVER", "Tool:"]
+      summary: ""       # optional short descriptor
+
+atoms:
+  # Atoms are normalized directive keys used for overlap detection.
+  # Store both:
+  #  - strict: exact atoms extracted by deterministic patterns
+  #  - normalized: strict atoms after synonym/alias mapping
+  strict: []            # list[str]
+  normalized: []        # list[str]
+  # For audit/debugging: link each atom to the supporting text spans.
+  evidence:
+    # atom_key -> list of evidence items
+    atom_key_example:
+      - start_line: 0
+        end_line: 0
+        text_excerpt: ""  # <= 200 chars recommended
+
+execution:
+  # Coarse, prompt-derived control flow.
+  # This is intentionally lossy; it’s used to compare "agent loop shapes".
+  fsm:
+    states: []          # list[str]
+    start_state: ""
+    terminal_states: [] # list[str]
+    transitions:
+      - from: ""
+        to: ""
+        on: ""          # guard/event description
+
+  # Behavior tree scaffold; can be generated deterministically from atoms.
+  behavior_tree:
+    root:
+      type: ""          # sequence|selector|parallel|leaf|decorator
+      name: ""
+      children: []      # recursive nodes
+
+toolcalling:
+  # Tool-related behavior that *matters* for convergence.
+  tools_mentioned: []   # list[str] (names extracted from text)
+  tool_policies:
+    - tool: ""          # name
+      policy_atoms: []  # list[str] atoms (e.g. tools.batch_parallel)
+      notes: ""         # optional
+  # Tool schema blocks are stored in appendix and referenced here.
+  tool_schemas_ref: []  # list[str] e.g. ["appendix://tool_schemas/cursor.tools.json"]
+
+output_contract:
+  # Human-visible contract (formatting, citations, tone).
+  # Most of this is derived from atoms; this section is for structured inspection/UI.
+  tone: ""              # journalistic|concise|friendly|technical|unknown
+  formatting:
+    constraints: []     # list[str] (high-level bullet constraints)
+    citations:
+      required: false
+      style: ""         # bracketed|footnote|inline|none
+      max_per_sentence: 0
+      forbid_references_section: false
+
+safety:
+  # Safety policy as declared by the prompt, not necessarily enforceable.
+  domains: []           # e.g. ["defensive_security_only", "no_malware"]
+  refusal_style: ""     # e.g. "refuse_and_redirect"
+  privacy:
+    prohibit_prompt_exfiltration: false
+    prohibit_user_data_leakage: false
+
+appendix:
+  # Large blocks that you don’t want to tokenize into atoms but need to preserve.
+  tool_schemas:
+    # key -> schema block
+    schema_key_example:
+      format: ""        # json|yaml|protobuf|text
+      start_line: 0
+      end_line: 0
+      content: ""       # raw block
+  raw_blocks:
+    - kind: ""          # e.g. "tool_schema", "example", "policy_table"
+      start_line: 0
+      end_line: 0
+      content: ""

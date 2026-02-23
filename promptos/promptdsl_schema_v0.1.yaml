@@ -1,0 +1,74 @@
+dsl_version: '0.1'
+about: PromptFSM DSL for representing system/agent prompts as behavior trees + FSM
+  + normalized features for deterministic overlap detection.
+prompt:
+  id: string
+  source:
+    repo: string
+    path: string
+    url: string
+  classification:
+    product: string
+    family: enum(system_prompt, agent_prompt, worker_prompt, oracle_prompt, escalation_prompt,
+      tools_spec)
+    primary_domain: enum(search, coding, webapp, writing, multimodal, other)
+    orchestration_role: enum(orchestrator, executor, writer, planner, router, hybrid)
+  metadata:
+    knowledge_cutoff: string|nullable
+    current_date: string|nullable
+    release_date: string|nullable
+    modalities:
+    - enum(text, image, code, toolcalls, other)
+  components:
+    identity:
+      name: string
+      description: string
+    goals:
+    - string
+    assumptions:
+    - string
+    constraints:
+    - type: enum(safety,security,capability,format,workflow,tooling,confidentiality,copyright,other)
+      rule: string
+    tool_policy:
+    - rule: string
+    output_policy:
+      tone: string|nullable
+      format_rules:
+      - string
+      citation_rules:
+      - string
+  execution:
+    behavior_tree:
+      root: node_id
+      nodes:
+        node_id:
+          type: enum(sequence,selector,parallel,condition,action)
+          when: string|nullable
+          do:
+          - string
+          children:
+          - node_id
+    fsm:
+      initial: state_id
+      states:
+        state_id:
+          on_enter:
+          - string
+          transitions:
+          - when: string
+            to: state_id
+  features:
+    atoms:
+    - string
+    params:
+      any: json
+  harness_candidates:
+  - feature: string
+    why: string
+    suggested_harness_enforcement: string
+overlap:
+  feature_id: string (stable canonical key, e.g., tools.batch_parallel)
+  normalization: lowercase, snake_case, sorted params
+  similarity: weighted_jaccard over feature atoms
+  graph: bipartite graph prompts<->features; project to prompt similarity
