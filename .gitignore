@@ -1,0 +1,11 @@
+# PromptOS local outputs and caches
+out/
+promptos/__pycache__/
+*.py[cod]
+
+# Local virtual environments
+.venv/
+venv/
+
+# macOS metadata
+.DS_Store

@@ -21,6 +21,19 @@ BINARY_EXTS = {
     ".png",".jpg",".jpeg",".gif",".webp",".svg",".ico",".pdf",".zip",".gz",".tar",".tgz",".7z",".mp4",".mov",".avi",".mp3",".wav"
 }
 
+SKIP_DIR_NAMES = {
+    ".git",
+    ".hg",
+    ".svn",
+    "__pycache__",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".venv",
+    "venv",
+    "node_modules",
+    "out",
+}
+
 def sha256_bytes(b: bytes) -> str:
     return hashlib.sha256(b).hexdigest()
 
@@ -272,11 +285,26 @@ def should_include(path: Path) -> bool:
         return False
     return True
 
-def scan_files(repo_root: Path) -> List[Path]:
-    files = []
-    for p in repo_root.rglob("*"):
-        if p.is_file() and should_include(p):
-            files.append(p)
+def scan_files(repo_root: Path, out_dir: Optional[Path] = None) -> List[Path]:
+    files: List[Path] = []
+    skip_dirs = set(SKIP_DIR_NAMES)
+
+    if out_dir is not None:
+        out_resolved = out_dir.resolve()
+        try:
+            rel_out = out_resolved.relative_to(repo_root)
+        except ValueError:
+            rel_out = None
+        if rel_out is not None and rel_out.parts:
+            skip_dirs.add(rel_out.parts[0])
+
+    for root, dirs, filenames in os.walk(repo_root):
+        dirs[:] = [d for d in dirs if d not in skip_dirs]
+        root_path = Path(root)
+        for name in filenames:
+            p = root_path / name
+            if should_include(p):
+                files.append(p)
     return sorted(files)
 
 def write_yaml(path: Path, obj: Dict[str, Any]) -> None:
@@ -353,7 +381,7 @@ def main() -> None:
     out_dir = Path(args.out).resolve()
     ontology = load_yaml(Path(args.ontology))
 
-    files = scan_files(repo_root)
+    files = scan_files(repo_root, out_dir)
 
     dsls: List[Dict[str, Any]] = []
     for f in files:
