@@ -25,10 +25,10 @@ aliases:
 # Regex-based mappings for strict extraction outputs (optional).
 # Use only when you can justify determinism + avoid overfitting.
 regex_aliases:
-  - pattern: "^tools\.mention\.(.+)$"
-    replace: "tools.mentioned"
-  - pattern: "^tools\.policy\.(.+)$"
-    replace: "tools.policy"
+  - pattern: '^tools\.mention\.(.+)$'
+    replace: 'tools.mentioned'
+  - pattern: '^tools\.policy\.(.+)$'
+    replace: 'tools.policy'
 
 # Category prefixes for graph "views"
 views:
